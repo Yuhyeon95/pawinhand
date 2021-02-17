@@ -18,9 +18,12 @@
 						<h3>${dto.writer} </h3>
 						<h2>${dto.regDate}</h2>
 						<div class="reply-func">
-							<div title="${dto.num}" class="del">삭제</div>
+							<c:if test="${member.id == dto.writer}">
+								<div title="${dto.num}" class="del">삭제</div>
+							</c:if>
 							<div title="${dto.num}" class="reply">답글</div>
 						</div>
+						
 				</div>
 				<div class="reply-contents">
 					<span>${dto.contents}</span>

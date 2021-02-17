@@ -34,16 +34,11 @@ public class CommunityReplyController {
 	}
 	
 	@GetMapping("boardReplyDelete")
-	public ModelAndView setDelete(CommunityReplyDTO communityReplyDTO, HttpSession session) {
+	public ModelAndView setDelete(CommunityReplyDTO communityReplyDTO) {
 		ModelAndView mv = new ModelAndView();
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		System.out.println("member : " + memberDTO.getId());
-		System.out.println("writer : " + communityReplyDTO.getCmn_num() );
-		if(memberDTO.getId().equals(communityReplyDTO.getWriter())) {
+		
 		int result = communityReplyService.setDelete(communityReplyDTO);
-		}else {
-			System.out.println("dddd");
-		}
+		
 		long num = communityReplyDTO.getCmn_num();
 		mv.setViewName("redirect:../community/communitySelect?num="+num);
 		return mv;

@@ -49,6 +49,7 @@ public class CommunityController {
 		if(boardDTO != null) {
 			mv.setViewName("board/boardSelect");
 			mv.addObject("dto", boardDTO);
+			System.out.println("dto writer : " + boardDTO.getWriter());
 			mv.addObject("board", "community");
 			
 		}else {

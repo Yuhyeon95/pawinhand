@@ -2,12 +2,17 @@ package com.ph4.s1.communityReply;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.ph4.s1.member.MemberDTO;
 
 @Controller
 @RequestMapping("/boardReply/**")
@@ -29,9 +34,16 @@ public class CommunityReplyController {
 	}
 	
 	@GetMapping("boardReplyDelete")
-	public ModelAndView setDelete(CommunityReplyDTO communityReplyDTO) {
+	public ModelAndView setDelete(CommunityReplyDTO communityReplyDTO, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		System.out.println("member : " + memberDTO.getId());
+		System.out.println("writer : " + communityReplyDTO.getCmn_num() );
+		if(memberDTO.getId().equals(communityReplyDTO.getWriter())) {
 		int result = communityReplyService.setDelete(communityReplyDTO);
+		}else {
+			System.out.println("dddd");
+		}
 		long num = communityReplyDTO.getCmn_num();
 		mv.setViewName("redirect:../community/communitySelect?num="+num);
 		return mv;
@@ -47,10 +59,12 @@ public class CommunityReplyController {
 	}
 	
 	@GetMapping("reply")
-	public ModelAndView setReply(CommunityReplyDTO communityReplyDTO) {
+	public ModelAndView setReply(CommunityReplyDTO communityReplyDTO, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		String contents = communityReplyDTO.getContents();
-		String writer = communityReplyDTO.getWriter();
+		String writer = memberDTO.getId();
+		System.out.println("writer : " + writer );
 		CommunityReplyDTO dto = communityReplyService.getOne(communityReplyDTO);
 		dto.setContents(contents);
 		dto.setWriter(writer);

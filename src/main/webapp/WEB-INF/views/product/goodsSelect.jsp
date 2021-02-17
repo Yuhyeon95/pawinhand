@@ -140,7 +140,6 @@
 			<input type="hidden" name="id" value="${member.id}"/>
 			<input type="hidden" name="product_num" value="${dto.product_num}">
 			<input type="hidden" name="price" value="${dto.price}" id="price">
-			<input type="hidden" name="id" value="${member.id}" id="id">
 			<div class="amount" style="height: 40px;border-top-style: solid;border-top-width: 1px;border-bottom-color: gray;">
 			<span>수량</span>
 				<div class="combo-box">

@@ -97,7 +97,7 @@
     
     $("#result").on("click", ".reply", function(){
     	var num = $(this).attr("title");
-    	$("#reply"+num).html("<form action='../boardReply/reply' method='get'><span>${dto.writer}</span><input type='hidden' value="+num+" name='num'><input type='hidden' value='${dto.writer}' name='writer'><input type='text' name='contents'><button>등록</button></form>");
+    	$("#reply"+num).html("<form action='../boardReply/reply' method='get'><span>${member.id}</span><input type='hidden' value="+num+" name='num'><input type='hidden' value='${dto.writer}' name='writer'><input type='text' name='contents'><button>등록</button></form>");
     });
     
     $("#result").on("click", ".del", function(){
